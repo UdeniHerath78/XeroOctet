@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XeroOctet.Api", "XeroOctet.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XeroOctet.Data", "XeroOctet.Data\XeroOctet.Data.csproj", "{A78D20CF-8A5D-4CA2-BB6E-41CCD2F71398}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XeroOctet.Test", "XeroOctet.Test\XeroOctet.Test.csproj", "{3F004778-A4DD-4D08-ABC4-0051CB8ADB46}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A78D20CF-8A5D-4CA2-BB6E-41CCD2F71398}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A78D20CF-8A5D-4CA2-BB6E-41CCD2F71398}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A78D20CF-8A5D-4CA2-BB6E-41CCD2F71398}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F004778-A4DD-4D08-ABC4-0051CB8ADB46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F004778-A4DD-4D08-ABC4-0051CB8ADB46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F004778-A4DD-4D08-ABC4-0051CB8ADB46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F004778-A4DD-4D08-ABC4-0051CB8ADB46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

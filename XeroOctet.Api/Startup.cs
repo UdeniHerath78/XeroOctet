@@ -5,7 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using XeroOctet.Data.Configuration;
 using XeroOctet.Data.DBContext;
+using XeroOctet.Data.Models;
+using XeroOctet.Data.Repositories;
 
 namespace XeroOctet.Api
 {
@@ -27,6 +30,8 @@ namespace XeroOctet.Api
             services.AddDbContext<XeroDBContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("OctetConnStr"), 
                     b => b.MigrationsAssembly("XeroOctet.Api")));
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddSwaggerGen(c =>
             {
