@@ -1,0 +1,69 @@
+﻿@page "/FetchInvoiceData"
+
+@using XeroOctet.Data.Models
+@using XeroOctet.WebClient.DTO
+@using XeroOctet.WebClient.Services
+
+@inject IInvoiceService _InvoiceService;  
+
+<h1>List of Invoices</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+@if (invoiceData == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Invoice Number</th>
+                <th>Contact Name</th>
+                <th>Invoice Issue Date</th>
+                <th>InvoiceAmount</th>
+                <th>OutstandingAmount</th>
+                <th>Healthy Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var invoiceItem in invoiceData)
+            {
+                <tr>
+                    <td>@invoiceItem.InvoiceNumber</td>
+                    <td>@invoiceItem.ContactName</td>
+                    <td>@invoiceItem.InvoiceIssueDate.ToShortDateString()</td>
+                    <td>@invoiceItem.InvoiceAmount</td>
+                    <td>@invoiceItem.OutstandingAmount</td>
+                    <td><span class="badge badge-warning">@GetInvoiceHealtyStatus(invoiceItem.InvoiceIssueDate,invoiceItem.OutstandingAmount)</span></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+
+    private IEnumerable<InvoiceDTO> invoiceData = null;
+    private string healthStatusHighlighter;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        invoiceData = await _InvoiceService.getInvoices();
+    }
+
+    private string GetInvoiceHealtyStatus(DateTime invoiceIssuedate, decimal outStandingAmount)
+    {
+        healthStatusHighlighter = "badge badge-success";
+
+        if (invoiceIssuedate.AddDays(90) <= DateTime.Today && outStandingAmount > 0)
+        {
+            healthStatusHighlighter = "badge badge-danger";
+            return "NO";
+        }
+
+        return "YES";
+    }
+}

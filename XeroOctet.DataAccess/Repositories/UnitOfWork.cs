@@ -10,9 +10,9 @@ namespace XeroOctet.DataAccess.Repositories
         public IInvoiceRepository Invoice {get; private set;}
 
         private readonly XeroDBContext _context;
-        private readonly ILogger _logger;
+        private readonly ILogger<UnitOfWork> _logger;
 
-        public UnitOfWork(XeroDBContext context, ILogger logger)
+        public UnitOfWork(XeroDBContext context, ILogger<UnitOfWork> logger)
         {
             _context = context;
             _logger = logger;

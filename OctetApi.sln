@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XeroOctet.Api", "XeroOctet.Api\XeroOctet.Api.csproj", "{23D3144E-F3DD-4BAF-878E-2FB2DFA1B5DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XeroOctet.Api", "XeroOctet.Api\XeroOctet.Api.csproj", "{23D3144E-F3DD-4BAF-878E-2FB2DFA1B5DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XeroOctet.Data", "XeroOctet.Data\XeroOctet.Data.csproj", "{A78D20CF-8A5D-4CA2-BB6E-41CCD2F71398}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XeroOctet.Data", "XeroOctet.Data\XeroOctet.Data.csproj", "{A78D20CF-8A5D-4CA2-BB6E-41CCD2F71398}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XeroOctet.Test", "XeroOctet.Test\XeroOctet.Test.csproj", "{3F004778-A4DD-4D08-ABC4-0051CB8ADB46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XeroOctet.Test", "XeroOctet.Test\XeroOctet.Test.csproj", "{3F004778-A4DD-4D08-ABC4-0051CB8ADB46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XeroOctet.DataAccess", "XeroOctet.DataAccess\XeroOctet.DataAccess.csproj", "{8459378B-FF6F-4F3F-94AB-BE8F16DA92D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XeroOctet.DataAccess", "XeroOctet.DataAccess\XeroOctet.DataAccess.csproj", "{8459378B-FF6F-4F3F-94AB-BE8F16DA92D8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XeroOctet.WebClient", "XeroOctet.WebClient\XeroOctet.WebClient.csproj", "{A84F6C78-79A7-46B2-ACE5-6D0C0FC822EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{8459378B-FF6F-4F3F-94AB-BE8F16DA92D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8459378B-FF6F-4F3F-94AB-BE8F16DA92D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8459378B-FF6F-4F3F-94AB-BE8F16DA92D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A84F6C78-79A7-46B2-ACE5-6D0C0FC822EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A84F6C78-79A7-46B2-ACE5-6D0C0FC822EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A84F6C78-79A7-46B2-ACE5-6D0C0FC822EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A84F6C78-79A7-46B2-ACE5-6D0C0FC822EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
