@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using XeroOctet.Data.DBContext;
 
-namespace XeroOctet.Api.Migrations
+namespace XeroOctet.DataAccess.Migrations
 {
     [DbContext(typeof(XeroDBContext))]
-    [Migration("20220224070259_v1")]
-    partial class v1
+    partial class XeroDBContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
-using XeroOctet.Data.Configuration;
+using XeroOctet.DataAccess.Repositories.IRepositories;
 
 namespace XeroOctet.Api.Controllers
 {
@@ -22,7 +22,7 @@ namespace XeroOctet.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var invoices = await _unitOfWork.Invoice.All();
+            var invoices = await _unitOfWork.Invoice.GetAllAsync();
             return Ok(invoices);
         }
     }

@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace XeroOctet.Api.Migrations
+namespace XeroOctet.DataAccess.Migrations
 {
-    public partial class v1 : Migration
+    public partial class InvoiceMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
