@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
-using XeroOctet.Data.Models;
+using Xero.NetStandard.OAuth2.Model.Accounting;
 using XeroOctet.WebClient.DTO;
 
 namespace XeroOctet.WebClient.Services
@@ -15,9 +17,36 @@ namespace XeroOctet.WebClient.Services
         {
             _httpClient = httpClient;
         }
-        public async Task<IEnumerable<InvoiceDTO>> getInvoices()
+
+        public async Task<IEnumerable<Invoice>> getInvoices()
         {
-            return await _httpClient.GetJsonAsync<InvoiceDTO[]>("invoice/");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Get, "/XeroInvoiceData");
+            var responseResult = await _httpClient.SendAsync(requestMessage);
+
+            if (responseResult.StatusCode == HttpStatusCode.OK)
+            {
+                var result = await responseResult.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<IEnumerable<Invoice>>(result);
+            }
+
+            return null;
+        }
+
+        public async Task<bool> saveInvoices(List<InvoiceDTO> invoiceDTOs)
+        {
+            string json = JsonConvert.SerializeObject(invoiceDTOs);
+
+            StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var responseResult = await _httpClient.PostAsync("/XeroInvoiceData/SaveInvoice", data);
+
+            if (responseResult.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+            }
+
+            return false;
+
         }
     }
 }

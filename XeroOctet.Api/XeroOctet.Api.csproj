@@ -12,6 +12,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="Xero.NetStandard.OAuth2" Version="3.22.1" />
+    <PackageReference Include="Xero.NetStandard.OAuth2Client" Version="1.5.1" />
   </ItemGroup>
 
   <ItemGroup>

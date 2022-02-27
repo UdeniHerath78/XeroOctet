@@ -25,7 +25,8 @@ namespace XeroOctet.WebClient
             services.AddServerSideBlazor();
             services.AddHttpClient<IInvoiceService, InvoiceService>(client =>
                            client.BaseAddress = new Uri("https://localhost:44358")
-            ); ;
+            );
+                        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

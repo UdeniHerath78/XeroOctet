@@ -6,8 +6,8 @@ namespace XeroOctet.WebClient.DTO
     {
         public string InvoiceNumber { get; set; }
         public string ContactName { get; set; }
-        public DateTime InvoiceIssueDate { get; set; }
-        public decimal InvoiceAmount { get; set; }
-        public decimal OutstandingAmount { get; set; }
+        public DateTime? InvoiceIssueDate { get; set; }
+        public decimal? InvoiceAmount { get; set; }
+        public decimal? OutstandingAmount { get; set; }
     }
 }

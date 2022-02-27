@@ -1,6 +1,7 @@
 ﻿@page "/FetchInvoiceData"
 
-@using XeroOctet.Data.Models
+
+@using Xero.NetStandard.OAuth2.Model.Accounting
 @using XeroOctet.WebClient.DTO
 @using XeroOctet.WebClient.Services
 
@@ -15,7 +16,11 @@
     <p><em>Loading...</em></p>
 }
 else
-{
+{   
+    <button class="btn btn-success" @onclick="() => OnSaveInvoiceData(invoiceData)">Save</button>
+    
+    <br/>
+    
     <table class="table">
         <thead>
             <tr>
@@ -32,38 +37,61 @@ else
             {
                 <tr>
                     <td>@invoiceItem.InvoiceNumber</td>
-                    <td>@invoiceItem.ContactName</td>
-                    <td>@invoiceItem.InvoiceIssueDate.ToShortDateString()</td>
-                    <td>@invoiceItem.InvoiceAmount</td>
-                    <td>@invoiceItem.OutstandingAmount</td>
-                    <td><span class="badge badge-warning">@GetInvoiceHealtyStatus(invoiceItem.InvoiceIssueDate,invoiceItem.OutstandingAmount)</span></td>
+                    <td>@invoiceItem.Contact.Name</td>
+                    <td>@invoiceItem.Date</td>
+                    <td>@invoiceItem.Total.GetValueOrDefault(0)</td>
+                    <td>@invoiceItem.AmountDue.GetValueOrDefault(0)</td>
+                    <td>@GetInvoiceHealtyStatus(invoiceItem.Date,invoiceItem.AmountDue)</td>
                 </tr>
             }
         </tbody>
     </table>
+
 }
 
 @code {
 
-    private IEnumerable<InvoiceDTO> invoiceData = null;
-    private string healthStatusHighlighter;
+    private IEnumerable<Invoice> invoiceData = null;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
         await base.OnInitializedAsync();
-        invoiceData = await _InvoiceService.getInvoices();
+        var result = await _InvoiceService.getInvoices();
+        invoiceData = result.Where(c => c.InvoiceNumber != "" && c.AmountDue > 0).ToList().Take(20);
     }
 
-    private string GetInvoiceHealtyStatus(DateTime invoiceIssuedate, decimal outStandingAmount)
+    private string GetInvoiceHealtyStatus(DateTime? invoiceIssuedate, decimal? outStandingAmount)
     {
-        healthStatusHighlighter = "badge badge-success";
-
-        if (invoiceIssuedate.AddDays(90) <= DateTime.Today && outStandingAmount > 0)
-        {
-            healthStatusHighlighter = "badge badge-danger";
+        if (invoiceIssuedate?.AddDays(90) <= DateTime.Today && outStandingAmount > 0)
+        {                        
             return "NO";
         }
 
         return "YES";
+    }
+
+    async Task OnSaveInvoiceData(IEnumerable<Invoice> invoices)
+    {
+        var invoiceDTO = new List<InvoiceDTO>();
+
+        foreach (var item in invoices)
+        {
+            var dto = new InvoiceDTO();
+
+            dto.InvoiceNumber = item.InvoiceNumber;
+            dto.ContactName = item.Contact.Name;
+            dto.InvoiceIssueDate = item.Date;
+            dto.InvoiceAmount = item.Total;
+            dto.OutstandingAmount = item.AmountDue;
+
+            invoiceDTO.Add(dto);
+
+        }
+
+        if(invoiceDTO.Count > 0)
+        {
+            var result = await _InvoiceService.saveInvoices(invoiceDTO);
+        }
+        
     }
 }

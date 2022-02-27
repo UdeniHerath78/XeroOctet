@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.2.0-preview3.20168.3" />
+    <PackageReference Include="Xero.NetStandard.OAuth2" Version="3.22.1" />
   </ItemGroup>
 
   <ItemGroup>
