@@ -65,6 +65,10 @@ namespace XeroOctet.Test.TestInvoice
             return new UnitOfWork(invoiceDataContext, logger.Object);
         }
 
+        /// <summary>
+        /// Sample data - When need to test queries
+        /// </summary>
+        /// <param name="context"></param>
         private void Seed(IUnitOfWork context)
         {
             var invoices = new[]

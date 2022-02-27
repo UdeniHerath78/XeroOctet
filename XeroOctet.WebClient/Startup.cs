@@ -24,7 +24,7 @@ namespace XeroOctet.WebClient
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddHttpClient<IInvoiceService, InvoiceService>(client =>
-                           client.BaseAddress = new Uri("https://localhost:44358")
+                           client.BaseAddress = new Uri(Configuration["ApiSettings:ApiBaseUrl"])
             );
                         
         }

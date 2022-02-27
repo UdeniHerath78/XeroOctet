@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
-using Xero.NetStandard.OAuth2.Api;
-using XeroOctet.Api.Helpers;
 using XeroOctet.Data.Models;
 using XeroOctet.DataAccess.Repositories.IRepositories;
 
@@ -38,7 +34,7 @@ namespace XeroOctet.Api.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogError("Exception when calling apiInstance.GetInvoice: " + e.Message);
+                _logger.LogError("Exception when calling XeroInvoiceData.SaveInvoice: " + e.Message);
                 return Ok(e.ToString());
             }
 
