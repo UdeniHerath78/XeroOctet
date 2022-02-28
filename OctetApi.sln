@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XeroOctet.DataAccess", "Xer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XeroOctet.WebClient", "XeroOctet.WebClient\XeroOctet.WebClient.csproj", "{A84F6C78-79A7-46B2-ACE5-6D0C0FC822EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XeroOctet.Shared", "XeroOctet.Shared\XeroOctet.Shared.csproj", "{4210AFFD-2BF1-4793-A012-16124418A4A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{A84F6C78-79A7-46B2-ACE5-6D0C0FC822EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A84F6C78-79A7-46B2-ACE5-6D0C0FC822EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A84F6C78-79A7-46B2-ACE5-6D0C0FC822EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4210AFFD-2BF1-4793-A012-16124418A4A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4210AFFD-2BF1-4793-A012-16124418A4A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4210AFFD-2BF1-4793-A012-16124418A4A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4210AFFD-2BF1-4793-A012-16124418A4A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

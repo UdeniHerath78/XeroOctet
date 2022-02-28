@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Xero.NetStandard.OAuth2.Api;
 using XeroOctet.Api.Helpers;
+using XeroOctet.Api.Services;
 
 namespace XeroOctet.Api.Controllers
 {
@@ -13,11 +14,15 @@ namespace XeroOctet.Api.Controllers
     {
         private readonly ILogger<XeroInvoiceDataController> _logger;
         private readonly IXeroSettings _xeroSettings;
+        private readonly IXeroInvoiceApiService _apiService;
 
-        public XeroInvoiceDataController(ILogger<XeroInvoiceDataController> logger, IXeroSettings xeroSettings)
+        public XeroInvoiceDataController(ILogger<XeroInvoiceDataController> logger, 
+            IXeroSettings xeroSettings,
+            IXeroInvoiceApiService apiService)
         {
             _logger = logger;
             _xeroSettings = xeroSettings;
+            _apiService = apiService;
         }
 
         [HttpGet]
@@ -29,8 +34,11 @@ namespace XeroOctet.Api.Controllers
             {
                 var apiInstance = new AccountingApi();
                 var xeroTenantId = "";
-                var result = await apiInstance.GetInvoicesAsync(xeroAccessToken, xeroTenantId);
-                return Ok(result._Invoices);
+                var sixMonthsAgo = DateTime.Now.AddMonths(-6).ToString("yyyy, MM, dd");
+                var invoicesFilter = "Date >= DateTime(" + sixMonthsAgo + ")";
+                var result = await apiInstance.GetInvoicesAsync(xeroAccessToken, xeroTenantId, null, invoicesFilter);
+                var filteredInvoices = await _apiService.GetFilteredInvoiceData(result._Invoices);
+                return Ok(filteredInvoices);
             }
             catch (Exception e)
             {

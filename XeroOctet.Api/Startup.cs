@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using XeroOctet.Api.Helpers;
+using XeroOctet.Api.Services;
 using XeroOctet.Data.DBContext;
 using XeroOctet.DataAccess.Repositories;
 using XeroOctet.DataAccess.Repositories.IRepositories;
@@ -32,6 +33,7 @@ namespace XeroOctet.Api
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IXeroSettings, XeroSettings>();
+            services.AddScoped<IXeroInvoiceApiService, XeroInvoiceApiService>();
 
             services.AddSwaggerGen(c =>
             {

@@ -5,30 +5,49 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using XeroOctet.Data.Models;
 using XeroOctet.DataAccess.Repositories.IRepositories;
+using XeroOctet.Shared.DTO;
 
 namespace XeroOctet.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class XeroInvoiceData : ControllerBase
+    public class XeroInvoiceStoreController : ControllerBase
     {
-        private readonly ILogger<XeroInvoiceDataController> _logger;
+        private readonly ILogger<XeroInvoiceStoreController> _logger;
         private readonly IUnitOfWork _unitOfWork;
+        
 
-        public XeroInvoiceData(ILogger<XeroInvoiceDataController> logger, IUnitOfWork unitOfWork)
+        public XeroInvoiceStoreController(ILogger<XeroInvoiceStoreController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
         }
 
         [HttpPost]
-        [Route("saveInvoice")]
-        public async Task<IActionResult> SaveInvoice([FromBody] IEnumerable<Invoice> invoices)
+        [Route("SaveInvoices")]
+        public async Task<IActionResult> SaveInvoices([FromBody] IEnumerable<InvoiceDTO> invoices)
         {
 
             try
             {
-                await _unitOfWork.Invoice.AddRangeAsync(invoices);
+                List<Invoice> invoice = new List<Invoice>();
+                
+                foreach (InvoiceDTO invoiceDTO in invoices)
+                {
+                    var item = new Invoice
+                    {
+                        InvoiceNumber = invoiceDTO.InvoiceNumber,
+                        ContactName = invoiceDTO.ContactName,
+                        InvoiceIssueDate = invoiceDTO.InvoiceIssueDate.GetValueOrDefault(),
+                        InvoiceAmount = invoiceDTO.InvoiceAmount.GetValueOrDefault(),
+                        OutstandingAmount = invoiceDTO.OutstandingAmount.GetValueOrDefault()
+                    };
+
+                    invoice.Add(item);
+                    
+                }
+
+                await _unitOfWork.Invoice.AddRangeAsync(invoice);
                 _unitOfWork.Save();
                 return Ok();
             }

@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\XeroOctet.Data\XeroOctet.Data.csproj" />
+    <ProjectReference Include="..\XeroOctet.Shared\XeroOctet.Shared.csproj" />
   </ItemGroup>
 
 </Project>

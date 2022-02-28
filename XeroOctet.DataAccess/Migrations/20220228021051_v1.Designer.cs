@@ -10,8 +10,8 @@ using XeroOctet.Data.DBContext;
 namespace XeroOctet.DataAccess.Migrations
 {
     [DbContext(typeof(XeroDBContext))]
-    [Migration("20220224225229_InvoiceMigration")]
-    partial class InvoiceMigration
+    [Migration("20220228021051_v1")]
+    partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

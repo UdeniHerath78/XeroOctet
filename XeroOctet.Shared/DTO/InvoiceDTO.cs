@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace XeroOctet.WebClient.DTO
+namespace XeroOctet.Shared.DTO
 {
     public class InvoiceDTO
     {

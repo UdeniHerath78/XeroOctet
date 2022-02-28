@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Xero.NetStandard.OAuth2.Model.Accounting;
-using XeroOctet.WebClient.DTO;
+using XeroOctet.Shared.DTO;
 
 namespace XeroOctet.WebClient.Services
 {
     public interface IInvoiceService
-    {       
-        Task<IEnumerable<Invoice>> getInvoices();
-        Task<bool> saveInvoices(List<InvoiceDTO> invoiceDTOs);
+    {
+        Task<IEnumerable<InvoiceDTO>> GetInvoices();
+        Task<bool> SaveInvoices(IEnumerable<InvoiceDTO> invoiceDTOs);
     }
 }

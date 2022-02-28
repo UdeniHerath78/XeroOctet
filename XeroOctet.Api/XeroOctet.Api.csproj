@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\XeroOctet.DataAccess\XeroOctet.DataAccess.csproj" />
+    <ProjectReference Include="..\XeroOctet.Shared\XeroOctet.Shared.csproj" />
   </ItemGroup>
 
 </Project>

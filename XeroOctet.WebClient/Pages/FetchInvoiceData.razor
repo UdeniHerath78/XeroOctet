@@ -2,7 +2,7 @@
 
 
 @using Xero.NetStandard.OAuth2.Model.Accounting
-@using XeroOctet.WebClient.DTO
+@using XeroOctet.Shared.DTO
 @using XeroOctet.WebClient.Services
 
 @inject IInvoiceService _InvoiceService;  
@@ -37,11 +37,13 @@ else
             {
                 <tr>
                     <td>@invoiceItem.InvoiceNumber</td>
-                    <td>@invoiceItem.Contact.Name</td>
-                    <td>@invoiceItem.Date</td>
-                    <td>@invoiceItem.Total.GetValueOrDefault(0)</td>
-                    <td>@invoiceItem.AmountDue.GetValueOrDefault(0)</td>
-                    <td>@GetInvoiceHealtyStatus(invoiceItem.Date,invoiceItem.AmountDue)</td>
+                    <td>@invoiceItem.ContactName</td>
+                    <td>@invoiceItem.InvoiceIssueDate</td>
+                    <td>@invoiceItem.InvoiceAmount.GetValueOrDefault(0)</td>
+                    <td>@invoiceItem.OutstandingAmount.GetValueOrDefault(0)</td>
+                    <td>@GetInvoiceHealtyStatus(invoiceItem.InvoiceIssueDate,
+                        invoiceItem.OutstandingAmount.GetValueOrDefault(0),
+                        invoiceItem.InvoiceAmount.GetValueOrDefault(0))</td>
                 </tr>
             }
         </tbody>
@@ -51,18 +53,18 @@ else
 
 @code {
 
-    private IEnumerable<Invoice> invoiceData = null;
+    private IEnumerable<InvoiceDTO> invoiceData = null;
 
     protected override async Task OnParametersSetAsync()
     {
         await base.OnInitializedAsync();
-        var result = await _InvoiceService.getInvoices();
-        invoiceData = result.Where(c => c.InvoiceNumber != "" && c.AmountDue > 0).ToList().Take(20);
+        invoiceData = await _InvoiceService.GetInvoices();
+
     }
 
-    private string GetInvoiceHealtyStatus(DateTime? invoiceIssuedate, decimal? outStandingAmount)
+    private string GetInvoiceHealtyStatus(DateTime? invoiceIssuedate, decimal? outStandingAmount, decimal? invoiceTotal)
     {
-        if (invoiceIssuedate?.AddDays(90) <= DateTime.Today && outStandingAmount > 0)
+        if (invoiceIssuedate?.AddDays(90) <= DateTime.Today && outStandingAmount > 0 && invoiceTotal > 100000)
         {                        
             return "NO";
         }
@@ -70,27 +72,11 @@ else
         return "YES";
     }
 
-    async Task OnSaveInvoiceData(IEnumerable<Invoice> invoices)
+    async Task OnSaveInvoiceData(IEnumerable<InvoiceDTO> invoiceDTO)
     {
-        var invoiceDTO = new List<InvoiceDTO>();
-
-        foreach (var item in invoices)
+        if(invoiceDTO.Any())
         {
-            var dto = new InvoiceDTO();
-
-            dto.InvoiceNumber = item.InvoiceNumber;
-            dto.ContactName = item.Contact.Name;
-            dto.InvoiceIssueDate = item.Date;
-            dto.InvoiceAmount = item.Total;
-            dto.OutstandingAmount = item.AmountDue;
-
-            invoiceDTO.Add(dto);
-
-        }
-
-        if(invoiceDTO.Count > 0)
-        {
-            var result = await _InvoiceService.saveInvoices(invoiceDTO);
+            var result = await _InvoiceService.SaveInvoices(invoiceDTO);
         }
         
     }
